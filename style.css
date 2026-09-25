@@ -165,17 +165,56 @@ a { color: inherit; }
 /* ---------------- Hero ---------------- */
 
 .hero {
-  padding: 88px 0 96px;
+  position: relative;
+  padding: 120px 0 104px;
   overflow: hidden;
+  isolation: isolate;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.hero::before {
+  width: 520px;
+  height: 520px;
+  top: -220px;
+  left: 50%;
+  transform: translateX(-72%);
+  background: radial-gradient(circle, var(--testosterose), transparent 70%);
+}
+
+.hero::after {
+  width: 460px;
+  height: 460px;
+  top: -160px;
+  left: 50%;
+  transform: translateX(28%);
+  background: radial-gradient(circle, var(--harmonious-rose), transparent 70%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .hero::before,
+  .hero::after { opacity: 0.28; }
 }
 
 .hero .container {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .hero-copy {
-  max-width: 640px;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
   text-align: center;
 }
 
