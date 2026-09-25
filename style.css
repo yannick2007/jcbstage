@@ -258,7 +258,7 @@ h1 .accent-word {
   font-size: 1.15rem;
   color: var(--text-muted);
   max-width: 46ch;
-  margin: 0 0 32px;
+  margin: 0 auto 32px;
 }
 
 .button-row {
