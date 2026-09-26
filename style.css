@@ -5,6 +5,8 @@
    ========================================================================== */
 
 :root {
+  color-scheme: dark;
+
   --purple-seduction: #522A6F;
   --testosterose: #DDAAFF;
   --rosarian: #FAEADD;
@@ -12,15 +14,15 @@
   --solarized: #FBCF4F;
   --wet-charcoal: #222023;
 
-  --bg: #FFFFFF;
-  --bg-soft: var(--rosarian);
-  --text: var(--wet-charcoal);
-  --text-muted: #6b6469;
-  --accent: var(--purple-seduction);
-  --accent-contrast: #FFFFFF;
-  --card-bg: #FFFFFF;
-  --border: rgba(34, 32, 35, 0.08);
-  --shadow: 0 20px 50px -25px rgba(82, 42, 111, 0.35);
+  --bg: #17151A;
+  --bg-soft: #201C26;
+  --text: #F5F1F7;
+  --text-muted: #B8AFC0;
+  --accent: var(--testosterose);
+  --accent-contrast: #2B1740;
+  --card-bg: #211D28;
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 20px 50px -25px rgba(0, 0, 0, 0.6);
 
   --radius-sm: 12px;
   --radius-md: 20px;
@@ -29,20 +31,6 @@
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
   --container: 1120px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #17151A;
-    --bg-soft: #201C26;
-    --text: #F5F1F7;
-    --text-muted: #B8AFC0;
-    --accent: var(--testosterose);
-    --accent-contrast: #2B1740;
-    --card-bg: #211D28;
-    --border: rgba(255, 255, 255, 0.08);
-    --shadow: 0 20px 50px -25px rgba(0, 0, 0, 0.6);
-  }
 }
 
 * { box-sizing: border-box; }
@@ -178,7 +166,7 @@ a { color: inherit; }
   z-index: -1;
   border-radius: 50%;
   filter: blur(70px);
-  opacity: 0.55;
+  opacity: 0.28;
   pointer-events: none;
 }
 
@@ -198,11 +186,6 @@ a { color: inherit; }
   left: 50%;
   transform: translateX(28%);
   background: radial-gradient(circle, var(--harmonious-rose), transparent 70%);
-}
-
-@media (prefers-color-scheme: dark) {
-  .hero::before,
-  .hero::after { opacity: 0.28; }
 }
 
 .hero .container {
