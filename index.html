@@ -64,6 +64,30 @@
     </div>
   </section>
 
+  <!-- ================= SCREENSHOTS ================= -->
+  <section class="screenshots" id="screenshots">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">So sieht's aus</span>
+        <h2>JCB Stage in Aktion</h2>
+      </div>
+    </div>
+
+    <div class="carousel">
+      <button class="carousel-arrow carousel-prev" aria-label="Vorheriges Bild">&#8249;</button>
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide"><img src="assets/screenshots/screenshot-1.webp" alt="Element-Details mit Notizen und Zählzeiten" loading="lazy"></div>
+        <div class="carousel-slide"><img src="assets/screenshots/screenshot-2.webp" alt="Mehrere Nummern verwalten" loading="lazy"></div>
+        <div class="carousel-slide"><img src="assets/screenshots/screenshot-3.webp" alt="Steps per Drag & Drop neu anordnen" loading="lazy"></div>
+        <div class="carousel-slide"><img src="assets/screenshots/screenshot-4.webp" alt="Nummern live mit dem Team teilen" loading="lazy"></div>
+        <div class="carousel-slide"><img src="assets/screenshots/screenshot-5.webp" alt="Musik mit Timecode in der App abspielen" loading="lazy"></div>
+      </div>
+      <button class="carousel-arrow carousel-next" aria-label="Nächstes Bild">&#8250;</button>
+    </div>
+
+    <div class="carousel-dots" id="carouselDots"></div>
+  </section>
+
   <!-- ================= FEATURES ================= -->
   <section class="features" id="features">
     <div class="container">
@@ -183,6 +207,48 @@
     navLinks.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
   }));
+
+  // Screenshot carousel
+  const track = document.getElementById('carouselTrack');
+  if (track) {
+    const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+    const dotsWrap = document.getElementById('carouselDots');
+
+    slides.forEach((slide, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Bild ' + (i + 1) + ' von ' + slides.length);
+      dot.addEventListener('click', () => {
+        slide.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      });
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.querySelectorAll('.carousel-dot'));
+
+    function updateActiveDot() {
+      const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+      let closest = 0, closestDist = Infinity;
+      slides.forEach((slide, i) => {
+        const r = slide.getBoundingClientRect();
+        const dist = Math.abs((r.left + r.width / 2) - trackCenter);
+        if (dist < closestDist) { closestDist = dist; closest = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+    }
+
+    let scrollTimer;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(updateActiveDot, 80);
+    });
+
+    document.querySelector('.carousel-prev').addEventListener('click', () => {
+      track.scrollBy({ left: -(slides[0].offsetWidth + 24), behavior: 'smooth' });
+    });
+    document.querySelector('.carousel-next').addEventListener('click', () => {
+      track.scrollBy({ left: slides[0].offsetWidth + 24, behavior: 'smooth' });
+    });
+  }
 </script>
 
 </body>
